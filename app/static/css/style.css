@@ -39,9 +39,9 @@ a:hover {
 
 .header-container h2 {
     flex: 1;
-    /* H1 text takes up the space */
+    /* H1 szöveg elfoglalja a helyet */
     text-align: center;
-    /* Center alignment */
+    /* Középre igazítás */
 }
 
 table thead th {
@@ -58,11 +58,11 @@ table thead th {
 
 #scrollTitle {
     display: none;
-    /* Initially hidden */
+    /* Kezdetben rejtve */
     text-align: center;
-    /* Center alignment */
+    /* Középre igazítás */
     width: 100%;
-    /* 100% width */
+    /* 100%-os szélesség */
 }
 
 .search-container {
@@ -87,7 +87,7 @@ table thead th {
 #searchInput {
     height: 40px;
     width: 240px;
-    margin: 10px 0 10px 20px;
+    margin: 10px 10px 10px 20px;
     padding: 12px 16px 10px 35px;
     box-sizing: border-box;
     border-radius: 8px;
@@ -97,7 +97,9 @@ table thead th {
 #addUrlBtn {
     display: block;
     background-color: #4CAF50;
-    margin: 10px 0;
+    margin: 15px 0 0 10px;
+    height: 35px;
+
 }
 
 button {
