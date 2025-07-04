@@ -40,7 +40,7 @@ def add_url():
         return jsonify({"error": "Name and URL are required"}), 400
 
     new_website = OrderedDict(
-        [('id', None), ('name', data['name']), ('url', data['url']), ('statuscd', data['statuscd']), ('statusmsg', data['statusmsg']), ('lastchange', data['lastchange']), ('totaldowntime', data['totaldowntime'])])
+        [('id', None), ('name', data['name']), ('url', data['url']), ('statuscd', data['statuscd']), ('statusmsg', data['statusmsg']), ('firstcheck', data['firstcheck']), ('lastcheck', data['lastcheck']), ('lastchange', data['lastchange']), ('totaldowntime', data['totaldowntime'])])
 
     try:
         with open(DATA_FILE, 'r+') as file:
@@ -102,9 +102,9 @@ def delete_url():
 
 def validate_data(data):
     for entry in data:
-        if not all(key in entry for key in ['id', 'name', 'url', 'statuscd', 'statusmsg', 'lastchange', 'totaldowntime']):
+        if not all(key in entry for key in ['id', 'name', 'url', 'statuscd', 'statusmsg', 'firstcheck', 'lastcheck', 'lastchange', 'totaldowntime']):
             return False
-        if not isinstance(entry['id'], int) or not isinstance(entry['name'], str) or not isinstance(entry['url'], str) or not isinstance(entry['statuscd'], str) or not isinstance(entry['statusmsg'], str) or not isinstance(entry['lastchange'], str) or not isinstance(entry['totaldowntime'], str):
+        if not isinstance(entry['id'], int) or not isinstance(entry['name'], str) or not isinstance(entry['url'], str) or not isinstance(entry['statuscd'], str) or not isinstance(entry['statusmsg'], str) or not isinstance(entry['firstcheck'], str) or not isinstance(entry['lastcheck'], str) or not isinstance(entry['lastchange'], str) or not isinstance(entry['totaldowntime'], str):
             return False
     return True
 
@@ -138,5 +138,36 @@ def import_url_registry():
 
     except json.JSONDecodeError:
         return jsonify({"error": "Invalid JSON file"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/reset_url', methods=['PUT'])
+def reset_url():
+    data = request.get_json()
+    if not data or 'id' not in data:
+        return jsonify({"error": "ID is required"}), 400
+
+    reset_id = data['id']
+    try:
+        with open(DATA_FILE, 'r+') as file:
+            urls = json.load(file)
+            for url in urls:
+                if url['id'] == reset_id:
+                    url['statuscd'] = "N/A"
+                    url['statusmsg'] = "N/A"
+                    url['firstcheck'] = "N/A"
+                    url['lastcheck'] = "N/A"
+                    url['lastchange'] = "N/A"
+                    url['totaldowntime'] = "N/A"
+                    break
+            else:
+                return jsonify({"error": "URL not found"}), 404
+
+            file.seek(0)
+            json.dump(urls, file, indent=4)
+            file.truncate()
+
+        return jsonify({"message": "Status reset successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

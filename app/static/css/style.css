@@ -120,6 +120,7 @@ button {
 #deleteUrlBtn {
     display: block;
     background-color: #b02f2f;
+    width: 140px;
 
 }
 
@@ -130,6 +131,7 @@ button {
 #editUrlBtn {
     display: block;
     background-color: #E6B800;
+    width: 140px;
 
 }
 
@@ -140,6 +142,7 @@ button {
 .resetBtn {
     background-color: #5e5e5e;
     color: white;
+    width: 140px;
 }
 
 .resetBtn:hover {
@@ -147,15 +150,22 @@ button {
 }
 
 #exportBtn,
-#importBtn {
+#importBtn,
+#configBtn {
     background-color: blue;
     color: white;
     margin: 0 6px;
 }
 
 #exportBtn:hover,
-#importBtn:hover {
+#importBtn:hover,
+#configBtn:hover {
     background-color: darkblue;
+}
+
+#configBtn.active {
+    background-color: #b0a72f;
+    /* Passzoló szín */
 }
 
 #container {
@@ -219,7 +229,11 @@ th:hover {
     color: white;
 }
 
-.laststatus-column {
+.firstcheck-column {
+    text-align: center;
+}
+
+.lastcheck-column {
     text-align: center;
 }
 

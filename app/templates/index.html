@@ -21,6 +21,7 @@
             <div class="search-container">
                 <button id="importBtn">Import URL List</button>
                 <button id="exportBtn">Export URL List</button>
+                <button id="configBtn">Config URL List</button>
                 <i class="fas fa-search"></i>
                 <input id="searchInput" type="text" placeholder="Search..." />
             </div>
@@ -28,13 +29,15 @@
         <table id="statusTable">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Website Name</th>
-                    <th>Website URL</th>
-                    <th>Status</th>
-                    <th>Last Status Change</th>
-                    <th>Total Downtime</th>
-                    <th id="toggleActionsColumn">Actions (+)</th>
+                    <th class="number-column">#</th>
+                    <th class="name-column">Website Name</th>
+                    <th class="url-column">Website URL</th>
+                    <th class="status-column">Status</th>
+                    <th class="firstcheck-column">First Status Check</th>
+                    <th class="lastcheck-column">Last Status Check</th>
+                    <th class="lastchange-column">Last Status Change</th>
+                    <th class="totaldowntime-column">Total Downtime</th>
+                    <th class="actions-column">Actions</th>
                 </tr>
             </thead>
             <tbody></tbody>

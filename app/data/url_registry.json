@@ -5,6 +5,8 @@
         "url": "https://www.python.org",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -14,6 +16,8 @@
         "url": "https://flask.palletsprojects.com/en/stable",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -23,6 +27,8 @@
         "url": "https://www.javascript.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -32,6 +38,8 @@
         "url": "https://html.spec.whatwg.org",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -41,6 +49,8 @@
         "url": "https://www.w3.org/Style/CSS/Overview.en.html",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -50,6 +60,8 @@
         "url": "https://www.istqb.org",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -59,6 +71,8 @@
         "url": "https://www.selenium.dev",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -68,6 +82,8 @@
         "url": "https://playwright.dev",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -77,6 +93,8 @@
         "url": "https://docs.pytest.org/en/stable",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -86,6 +104,8 @@
         "url": "https://www.docker.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -95,6 +115,8 @@
         "url": "https://www.w3schools.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -104,6 +126,8 @@
         "url": "https://code.visualstudio.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -113,6 +137,8 @@
         "url": "https://github.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -122,6 +148,8 @@
         "url": "https://stackoverflow.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -131,6 +159,8 @@
         "url": "https://github.com/features/copilot",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -140,6 +170,8 @@
         "url": "https://chat.openai.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -149,6 +181,8 @@
         "url": "https://gemini.google.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -158,6 +192,8 @@
         "url": "https://claude.ai",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -167,6 +203,8 @@
         "url": "https://www.perplexity.ai",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     },
@@ -176,6 +214,8 @@
         "url": "https://cursor.com",
         "statuscd": "200",
         "statusmsg": "The request is OK",
+        "firstcheck": "N/A",
+        "lastcheck": "N/A",
         "lastchange": "N/A",
         "totaldowntime": "N/A"
     }

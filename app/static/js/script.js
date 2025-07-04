@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let websites = [];
-    let filteredWebsites = []; // Store the filtered data
+    let filteredWebsites = [];
     let currentSort = {
         column: null,
         direction: "asc",
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add event listeners for sorting
     document
-        .querySelectorAll("th:not(#toggleActionsColumn)")
+        .querySelectorAll("th:not(.actions-column)")
         .forEach((header, index) => {
             header.addEventListener("click", () => {
                 sortTable(index);
@@ -32,25 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    const actionsColumnHeader = document.getElementById("toggleActionsColumn");
-    let actionsVisible = false;
-    toggleActionsColumn(actionsVisible);
-
-    actionsColumnHeader.addEventListener("click", function () {
-        actionsVisible = !actionsVisible;
-        toggleActionsColumn(actionsVisible);
-        actionsColumnHeader.textContent = actionsVisible
-            ? "Actions (-)"
-            : "Actions (+)";
-    });
-
-    function toggleActionsColumn(show) {
-        const actionColumns = document.querySelectorAll(".actions-column");
-        actionColumns.forEach((col) => {
-            col.style.display = show ? "flex" : "none";
-        });
-    }
-
     function loadUrlRegistry() {
         fetch("data/url_registry.json")
             .then((response) => response.json())
@@ -62,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     url: item.url,
                     statuscd: item.statuscd,
                     statusmsg: item.statusmsg,
+                    firstcheck: item.firstcheck,
+                    lastcheck: item.lastcheck,
                     lastchange: item.lastchange,
                     totaldowntime: item.totaldowntime,
                 }));
@@ -88,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
           <td class="name-column">${website.name}</td>
           <td class="url-column"><a target="_blank" href="${website.url}">${website.url}</a></td>
           ${statusColumn}
+          <td class="firstcheck-column">${website.firstcheck}</td>
+          <td class="lastcheck-column">${website.lastcheck}</td>
           <td class="lastchange-column">${website.lastchange}</td>
           <td class="totaldowntime-column">${website.totaldowntime}</td>
           <td class="actions-column">
@@ -98,9 +83,19 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.appendChild(row);
         });
 
+        let actionsVisible = false;
+
+        document.getElementById("configBtn").addEventListener("click", function () {
+            document.querySelectorAll(".actions-column").forEach((column) => {
+                column.style.display = actionsVisible ? "none" : "table-cell";
+            });
+            actionsVisible = !actionsVisible;
+            this.classList.toggle("active", actionsVisible); // Add or remove active class
+        });
+
         document.querySelectorAll(".resetBtn").forEach((button) => {
             button.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
+                const id = parseInt(this.getAttribute("data-id"));
                 resetUrl(id);
             });
         });
@@ -111,8 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             cell.addEventListener("mouseover", showTooltip);
             cell.addEventListener("mouseout", hideTooltip);
         });
-
-        toggleActionsColumn(actionsVisible);
     }
 
     function sortTable(columnIndex) {
@@ -121,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "name",
             "url",
             "statuscd",
+            "firstcheck",
+            "lastcheck",
             "lastchange",
             "totaldowntime",
         ][columnIndex];
@@ -150,6 +145,17 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTable(filteredWebsites);
     }
 
+    function isValidUrl(url) {
+        const urlPattern = new RegExp(
+            "^(https?:\\/\\/)?" + // http vagy https
+            "((([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,})|" + // domain név
+            "((\\d{1,3}\\.){3}\\d{1,3}))" + // vagy IP cím (IPv4)
+            "(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?$",
+            "i"
+        ); // port és útvonal
+        return !!urlPattern.test(url);
+    }
+
     function showTooltip(event) {
         const statusMsg = event.target.getAttribute("data-statusmsg");
         const tooltip = document.createElement("div");
@@ -171,10 +177,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function resetUrl(id) {
-        alert(`Reset button clicked for ID: ${id}`);
+        const resetData = {
+            id: id,
+            statuscd: "N/A",
+            statusmsg: "N/A",
+            firstcheck: "N/A",
+            lastcheck: "N/A",
+            lastchange: "N/A",
+            totaldowntime: "N/A",
+        };
+
+        fetch("/reset_url", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(resetData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    alert("An error occurred: " + data.error);
+                } else {
+                    alert("Status reset successful!");
+                    location.reload(); // Refresh data without reloading the page
+                }
+            })
+            .catch((error) => console.error("Error:", error));
     }
 
     function importJson() {
+        const confirmation = confirm(
+            "Importing will overwrite the current URL list and you will lose its content permanently. Are you sure you want to import a new URL list?"
+        );
+
+        if (!confirmation) return; // If user clicks "Cancel", do nothing
+
         const input = document.createElement("input");
         input.type = "file";
         input.accept = ".json";
@@ -198,17 +234,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch((error) => console.error("Error:", error));
         };
-        input.click();
+        input.click(); // Open file dialog after confirmation
     }
 
     function exportJson() {
         const exportData = websites.map(
-            ({ id, name, url, statuscd, statusmsg, lastchange, totaldowntime }) => ({
+            ({
                 id,
                 name,
                 url,
                 statuscd,
                 statusmsg,
+                firstcheck,
+                lastcheck,
+                lastchange,
+                totaldowntime,
+            }) => ({
+                id,
+                name,
+                url,
+                statuscd,
+                statusmsg,
+                firstcheck,
+                lastcheck,
                 lastchange,
                 totaldowntime,
             })
@@ -238,6 +286,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     website.name.toLowerCase().includes(searchTerm) ||
                     website.url.toLowerCase().includes(searchTerm) ||
                     website.statuscd.toLowerCase().includes(searchTerm) ||
+                    website.firstcheck.toLowerCase().includes(searchTerm) ||
+                    website.lastcheck.toLowerCase().includes(searchTerm) ||
                     website.lastchange.toLowerCase().includes(searchTerm) ||
                     website.totaldowntime.toLowerCase().includes(searchTerm)
             );
@@ -264,6 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = prompt("Enter Website URL:");
         if (url === null) return alert("Website URL is required.");
 
+        if (!isValidUrl(url)) {
+            alert("The URL format is invalid. Please enter a valid URL.");
+            return;
+        }
+
         const id = websites.length ? Math.max(...websites.map((w) => w.id)) + 1 : 1;
 
         const newUrl = {
@@ -272,6 +327,8 @@ document.addEventListener("DOMContentLoaded", function () {
             url,
             statuscd: "N/A",
             statusmsg: "N/A",
+            firstcheck: "N/A",
+            lastcheck: "N/A",
             lastchange: "N/A",
             totaldowntime: "N/A",
         };
@@ -310,6 +367,11 @@ function editUrl(id) {
     const url = prompt("Edit Website URL:", currentUrl);
     // Check if the user closed the prompt (Cancel)
     if (url === null) return; // Exit if Cancel was clicked
+
+    if (!isValidUrl(url)) {
+        alert("The URL format is invalid. Please enter a valid URL.");
+        return;
+    }
 
     if (!name || !url) return alert("Website Name and Website URL are required");
 
