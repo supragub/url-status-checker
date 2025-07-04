@@ -10,20 +10,9 @@ if (-Not (Test-Path -Path "venv")) {
     Write-Host " Done.`n"
 }
 
-# Activate virtual environment
-Write-Host "`nActivating virtual environment..." -NoNewline
-& .\venv\Scripts\Activate.ps1
-Write-Host " Done.`n"
-
-# Determine which .env file to use based on FLASK_ENV
+# Load environment variables from .env file
 $envFile = ".env"
-if ($env:FLASK_ENV -eq "development") {
-    $envFile = ".env.development"
-} elseif ($env:FLASK_ENV -eq "production") {
-    $envFile = ".env.production"
-}
 
-# Load the appropriate .env file
 if (Test-Path -Path $envFile) {
     Write-Host "`nLoading environment variables from $envFile..." -NoNewline
     Get-Content $envFile | ForEach-Object {
@@ -32,9 +21,15 @@ if (Test-Path -Path $envFile) {
         }
     }
     Write-Host " Done.`n"
-} else {
+}
+else {
     Write-Host "`n$envFile file not found. Please create it manually.`n"
 }
+
+# Activate virtual environment
+Write-Host "`nActivating virtual environment..." -NoNewline
+& .\venv\Scripts\Activate
+Write-Host " Done.`n"
 
 # Install dependencies
 Write-Host "`nCheck dependencies..." -NoNewline
@@ -47,7 +42,7 @@ Start-Process -NoNewWindow -FilePath "python" -ArgumentList "run.py" -RedirectSt
 Write-Host " Done.`n"
 
 # Wait for the server to start
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 10
 
 # Open the default web browser with the specified URL
 Write-Host "`nOpening web browser..." -NoNewline

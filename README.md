@@ -16,28 +16,31 @@ Designed to check the status of URLs and API endpoints. This is not production r
 
 ```
 url-status-checker/
-├── app/                  # Main application package
-│   ├── __init__.py       # Flask app factory
-│   ├── routes.py         # Flask routes
-│   ├── data/             # Data files (e.g., url_registry.json)
-│   ├── static/           # Static files (CSS, JS)
+├── app/                        # Main application package
+│   ├── __init__.py             # Flask app factory
+│   ├── routes.py               # Flask routes
+│   ├── status_checker.py       # URL status checking and logging logic
+│   ├── data/                   # Data files (e.g., url_registry.json)
+│   │   ├── urls/               # Archived request result data
+│   │   └── url_registry.json   # List of URLs to check
+│   ├── static/                 # Static files (CSS, JS)
 │   │   ├── css/
-│   │   │   └── style.css
+│   │   │   └── style.css       # Main stylesheet
 │   │   └── js/
-│   │       └── script.js
-│   └── templates/        # HTML templates
-│       └── index.html
-├── logs/                 # Log files
-│   ├── flask_error.log
-│   ├── flask_output.log
-│   └── requirements.log
-├── requirements.txt      # Python dependencies
-├── run.py                # Entry point to run the Flask app
-├── start.ps1       # Script to start the app locally (Windows)
-├── .env.example          # Example environment variables
-├── LICENSE
-├── README.md
-└── .gitignore
+│   │       └── script.js       # Main frontend JavaScript
+│   └── templates/              # HTML templates
+│       └── index.html          # Main HTML template
+├── logs/                       # Log files
+│   ├── flask_error.log         # Flask error log
+│   ├── flask_output.log        # Flask output log
+│   └── requirements.log        # Dependency installation log
+├── requirements.txt            # Python dependencies
+├── run.py                      # Entry point to run the Flask app
+├── start.ps1                   # Script to start the app locally (Windows)
+├── .env.example                # Example environment variables
+├── LICENSE                     # License file
+├── README.md                   # Project documentation
+└── .gitignore                  # Git ignore rules
 ```
 
 ## Prerequisites:

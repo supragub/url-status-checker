@@ -58,11 +58,11 @@ table thead th {
 
 #scrollTitle {
     display: none;
-    /* Kezdetben rejtve */
+    /* Initially hidden */
     text-align: center;
-    /* Középre igazítás */
+    /* Center alignment */
     width: 100%;
-    /* 100%-os szélesség */
+    /* 100% width */
 }
 
 .search-container {
@@ -73,7 +73,7 @@ table thead th {
 
 .search-container i {
     position: absolute;
-    right: 215px;
+    right: 220px;
     color: #888;
 }
 

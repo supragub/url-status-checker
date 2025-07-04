@@ -15,10 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-from app import create_app
-
-app = create_app()
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
+LOG_DIR = "data/urls/"
+URL_REGISTRY_FILE = "data/url_registry.json"
+DEFAULT_INTERVAL_SECONDS = 60
