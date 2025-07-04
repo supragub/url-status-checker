@@ -39,9 +39,9 @@ a:hover {
 
 .header-container h2 {
     flex: 1;
-    /* H1 szöveg elfoglalja a helyet */
+    /* H1 text takes up the space */
     text-align: center;
-    /* Középre igazítás */
+    /* Center alignment */
 }
 
 table thead th {
@@ -188,6 +188,12 @@ td {
 th {
     background-color: #4c6caf;
     color: white;
+    cursor: pointer;
+}
+
+th:hover {
+    background-color: #3b529c;
+    /* Change background on hover */
 }
 
 .actions-column {

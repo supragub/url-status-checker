@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     let websites = [];
+    let currentSort = {
+        column: null,
+        direction: "asc",
+    };
 
-    // Data loading from JSON
     loadUrlRegistry();
 
     document.getElementById("addUrlBtn").addEventListener("click", addUrl);
@@ -9,27 +12,32 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("importBtn").addEventListener("click", importJson);
     document.getElementById("exportBtn").addEventListener("click", exportJson);
 
+    // Add event listeners for sorting
+    document
+        .querySelectorAll("th:not(#toggleActionsColumn)")
+        .forEach((header, index) => {
+            header.addEventListener("click", () => {
+                sortTable(index);
+            });
+        });
+
+    // Scroll behavior for the title
     document.addEventListener("scroll", function () {
         const scrollTitle = document.getElementById("scrollTitle");
         if (window.scrollY > 0) {
-            // If the scroll position reaches 0
-            scrollTitle.style.display = "block"; // Show it
+            scrollTitle.style.display = "block";
         } else {
-            scrollTitle.style.display = "none"; // Hide it
+            scrollTitle.style.display = "none";
         }
     });
 
     const actionsColumnHeader = document.getElementById("toggleActionsColumn");
-    let actionsVisible = false; // Default to hidden actions column
-
-    // Initially hide actions column
+    let actionsVisible = false;
     toggleActionsColumn(actionsVisible);
 
     actionsColumnHeader.addEventListener("click", function () {
         actionsVisible = !actionsVisible;
         toggleActionsColumn(actionsVisible);
-
-        // Toggle header text
         actionsColumnHeader.textContent = actionsVisible
             ? "Actions (-)"
             : "Actions (+)";
@@ -66,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
         tableBody.innerHTML = "";
 
         websitesToRender.forEach((website) => {
-            const row = document.createElement("tr");
             const statusColumn = `
         <td class="status-column" style="background-color: ${getStatusColor(
                 website.statuscd
             )}" 
             data-statusmsg="${website.statusmsg}">${website.statuscd}</td>
       `;
+            const row = document.createElement("tr");
             row.innerHTML = `
           <td class="number-column">${website.number}</td>
           <td class="name-column">${website.name}</td>
@@ -88,11 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.appendChild(row);
         });
 
-        // Add event listeners to the Reset STATUS button
         document.querySelectorAll(".resetBtn").forEach((button) => {
             button.addEventListener("click", function () {
                 const id = this.getAttribute("data-id");
-                resetUrl(id); // Hívja meg a resetUrl függvényt az adott id-vel
+                resetUrl(id);
             });
         });
 
@@ -103,8 +110,42 @@ document.addEventListener("DOMContentLoaded", function () {
             cell.addEventListener("mouseout", hideTooltip);
         });
 
-        // Update the visibility of action columns after rendering
         toggleActionsColumn(actionsVisible);
+    }
+
+    function sortTable(columnIndex) {
+        const sortKey = [
+            "number",
+            "name",
+            "url",
+            "statuscd",
+            "lastchange",
+            "totaldowntime",
+        ][columnIndex];
+
+        // Toggle sort direction
+        if (currentSort.column === sortKey) {
+            currentSort.direction = currentSort.direction === "asc" ? "desc" : "asc";
+        } else {
+            currentSort.column = sortKey;
+            currentSort.direction = "asc";
+        }
+
+        websites.sort((a, b) => {
+            const aValue = a[sortKey];
+            const bValue = b[sortKey];
+
+            if (typeof aValue === "string") {
+                return currentSort.direction === "asc"
+                    ? aValue.localeCompare(bValue)
+                    : bValue.localeCompare(aValue);
+            }
+            return currentSort.direction === "asc"
+                ? aValue - bValue
+                : bValue - aValue;
+        });
+
+        renderTable(websites);
     }
 
     function showTooltip(event) {
@@ -150,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         alert("An error occurred: " + data.error);
                     } else {
                         alert("Import successful!");
-                        loadUrlRegistry(); // Reload the table
+                        loadUrlRegistry();
                     }
                 })
                 .catch((error) => console.error("Error:", error));
@@ -159,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function exportJson() {
-        // Create a new array with only the required fields
         const exportData = websites.map(
             ({ id, name, url, statuscd, statusmsg, lastchange, totaldowntime }) => ({
                 id,
@@ -188,7 +228,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById("searchInput")
             .value.toLowerCase();
 
-        // If the search input is empty, render all websites
         if (searchTerm === "") {
             renderTable(websites);
             return;
