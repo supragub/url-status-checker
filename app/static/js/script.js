@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("importBtn").addEventListener("click", importJson);
     document.getElementById("exportBtn").addEventListener("click", exportJson);
 
+    document.addEventListener("scroll", function () {
+        const scrollTitle = document.getElementById("scrollTitle");
+        if (window.scrollY > 0) {
+            // If the scroll position reaches 0
+            scrollTitle.style.display = "block"; // Show it
+        } else {
+            scrollTitle.style.display = "none"; // Hide it
+        }
+    });
+
     const actionsColumnHeader = document.getElementById("toggleActionsColumn");
     let actionsVisible = false; // Default to hidden actions column
 
@@ -225,6 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
             lastchange: "N/A",
             totaldowntime: "N/A",
         };
+
         websites.push(newUrl);
         location.reload();
 
