@@ -238,3 +238,11 @@ th:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: opacity 0.2s ease;
 }
+
+.favicon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
