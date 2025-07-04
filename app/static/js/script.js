@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let websites = [];
+    let filteredWebsites = []; // Store the filtered data
     let currentSort = {
         column: null,
         direction: "asc",
@@ -64,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     lastchange: item.lastchange,
                     totaldowntime: item.totaldowntime,
                 }));
-                renderTable(websites);
+                filteredWebsites = websites; // By default, show all data
+                renderTable(filteredWebsites);
             })
             .catch((error) => console.error("Error loading JSON data:", error));
     }
@@ -131,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             currentSort.direction = "asc";
         }
 
-        websites.sort((a, b) => {
+        filteredWebsites.sort((a, b) => {
             const aValue = a[sortKey];
             const bValue = b[sortKey];
 
@@ -145,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 : bValue - aValue;
         });
 
-        renderTable(websites);
+        renderTable(filteredWebsites);
     }
 
     function showTooltip(event) {
@@ -229,18 +231,17 @@ document.addEventListener("DOMContentLoaded", function () {
             .value.toLowerCase();
 
         if (searchTerm === "") {
-            renderTable(websites);
-            return;
+            filteredWebsites = websites;
+        } else {
+            filteredWebsites = websites.filter(
+                (website) =>
+                    website.name.toLowerCase().includes(searchTerm) ||
+                    website.url.toLowerCase().includes(searchTerm) ||
+                    website.statuscd.toLowerCase().includes(searchTerm) ||
+                    website.lastchange.toLowerCase().includes(searchTerm) ||
+                    website.totaldowntime.toLowerCase().includes(searchTerm)
+            );
         }
-
-        const filteredWebsites = websites.filter(
-            (website) =>
-                website.name.toLowerCase().includes(searchTerm) ||
-                website.url.toLowerCase().includes(searchTerm) ||
-                website.statuscd.toLowerCase().includes(searchTerm) ||
-                website.lastchange.toLowerCase().includes(searchTerm) ||
-                website.totaldowntime.toLowerCase().includes(searchTerm)
-        );
 
         renderTable(filteredWebsites);
     }
