@@ -1,3 +1,16 @@
+let actionsVisible = false;
+
+function isValidUrl(url) {
+    const urlPattern = new RegExp(
+        "^(https?:\\/\\/)?" + // http vagy https
+        "((([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,})|" + // domain név
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // vagy IP cím (IPv4)
+        "(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?$",
+        "i"
+    ); // port és útvonal
+    return !!urlPattern.test(url);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let websites = [];
     let filteredWebsites = [];
@@ -7,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     loadUrlRegistry();
+
+    document.getElementById("configBtn").addEventListener("click", function () {
+        actionsVisible = !actionsVisible;
+        document.querySelectorAll(".actions-column").forEach((column) => {
+            column.style.display = actionsVisible ? "table-cell" : "none";
+        });
+        this.classList.toggle("active", actionsVisible); // Add or remove active class
+    });
 
     document.getElementById("addUrlBtn").addEventListener("click", addUrl);
     document.getElementById("searchInput").addEventListener("keyup", filterTable);
@@ -60,37 +81,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         websitesToRender.forEach((website) => {
             const statusColumn = `
-        <td class="status-column" style="background-color: ${getStatusColor(
+      <td class="status-column" style="background-color: ${getStatusColor(
                 website.statuscd
             )}" 
-            data-statusmsg="${website.statusmsg}">${website.statuscd}</td>
-      `;
+          data-statusmsg="${website.statusmsg}">${website.statuscd}</td>
+    `;
             const row = document.createElement("tr");
             row.innerHTML = `
-          <td class="number-column">${website.number}</td>
-          <td class="name-column">${website.name}</td>
-          <td class="url-column"><a target="_blank" href="${website.url}">${website.url}</a></td>
-          ${statusColumn}
-          <td class="firstcheck-column">${website.firstcheck}</td>
-          <td class="lastcheck-column">${website.lastcheck}</td>
-          <td class="lastchange-column">${website.lastchange}</td>
-          <td class="totaldowntime-column">${website.totaldowntime}</td>
-          <td class="actions-column">
-              <button class="resetBtn" data-id="${website.id}">Reset STATUS</button>
-              <button id="editUrlBtn" onclick="editUrl(${website.id})">Edit URL</button>
-              <button id="deleteUrlBtn" onclick="confirmDeleteUrl(${website.id}, '${website.name}')">Delete URL</button>
-          </td>`;
+        <td class="number-column">${website.number}</td>
+        <td class="name-column">${website.name}</td>
+        <td class="url-column"><a target="_blank" href="${website.url}">${website.url
+                }</a></td>
+        ${statusColumn}
+        <td class="firstcheck-column">${website.firstcheck}</td>
+        <td class="lastcheck-column">${website.lastcheck}</td>
+        <td class="lastchange-column">${website.lastchange}</td>
+        <td class="totaldowntime-column">${website.totaldowntime}</td>
+        <td class="actions-column" style="display: ${actionsVisible ? "table-cell" : "none"
+                }">
+            <button class="resetBtn" data-id="${website.id
+                }">Reset STATUS</button>
+            <button id="editUrlBtn" onclick="editUrl(${website.id
+                })">Edit URL</button>
+            <button id="deleteUrlBtn" onclick="confirmDeleteUrl(${website.id
+                }, '${website.name}')">Delete URL</button>
+        </td>`;
             tableBody.appendChild(row);
-        });
-
-        let actionsVisible = false;
-
-        document.getElementById("configBtn").addEventListener("click", function () {
-            document.querySelectorAll(".actions-column").forEach((column) => {
-                column.style.display = actionsVisible ? "none" : "table-cell";
-            });
-            actionsVisible = !actionsVisible;
-            this.classList.toggle("active", actionsVisible); // Add or remove active class
         });
 
         document.querySelectorAll(".resetBtn").forEach((button) => {
@@ -143,17 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         renderTable(filteredWebsites);
-    }
-
-    function isValidUrl(url) {
-        const urlPattern = new RegExp(
-            "^(https?:\\/\\/)?" + // http vagy https
-            "((([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,})|" + // domain név
-            "((\\d{1,3}\\.){3}\\d{1,3}))" + // vagy IP cím (IPv4)
-            "(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?$",
-            "i"
-        ); // port és útvonal
-        return !!urlPattern.test(url);
     }
 
     function showTooltip(event) {
