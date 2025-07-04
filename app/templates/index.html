@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Status Checker</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <h1>URL Status Checker</h1>
+    <div id="container">
+        <div class="header-container">
+            <button id="addUrlBtn">Add New URL</button>
+            <div class="search-container">
+                <button id="importBtn">Import URL List</button>
+                <button id="exportBtn">Export URL List</button>
+                <i class="fas fa-search"></i>
+                <input id="searchInput" type="text" placeholder="Search..." />
+            </div>
+        </div>
+        <table id="statusTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Website Name</th>
+                    <th>Website URL</th>
+                    <th>Status</th>
+                    <th>Last Status Change</th>
+                    <th>Total Downtime</th>
+                    <th id="toggleActionsColumn">Actions (+)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="static/js/script.js"></script>
+</body>
+
+</html>

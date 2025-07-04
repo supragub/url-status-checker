@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-container i {
+    position: absolute;
+    right: 215px;
+    color: #888;
+}
+
+.search-container input {
+    padding-left: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+#searchInput {
+    height: 40px;
+    width: 240px;
+    margin: 10px 0 10px 20px;
+    padding: 12px 16px 10px 35px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+#addUrlBtn {
+    display: block;
+    background-color: #4CAF50;
+    margin: 10px 0;
+}
+
+button {
+    display: block;
+    margin: 5px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#addUrlBtn:hover {
+    background-color: #45a049;
+}
+
+#deleteUrlBtn {
+    display: block;
+    background-color: #b02f2f;
+
+}
+
+#deleteUrlBtn:hover {
+    background-color: #841a1a;
+}
+
+#editUrlBtn {
+    display: block;
+    background-color: #E6B800;
+
+}
+
+#editUrlBtn:hover {
+    background-color: #ceaa1d;
+}
+
+.resetBtn {
+    background-color: #5e5e5e;
+    color: white;
+}
+
+.resetBtn:hover {
+    background-color: #4c4c4c;
+}
+
+#exportBtn,
+#importBtn {
+    background-color: blue;
+    color: white;
+    margin: 0 6px;
+}
+
+#exportBtn:hover,
+#importBtn:hover {
+    background-color: darkblue;
+}
+
+#container {
+    width: 90%;
+    margin: 0 auto 60px auto;
+    /* Container középre igazítása */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    /* Táblázat középre igazítása */
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table tbody tr:hover {
+    background-color: #f0f0f0;
+    /* Light gray background on hover */
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4c6caf;
+    color: white;
+}
+
+.actions-column {
+    display: none;
+    /* Initially hide actions column */
+    gap: 5px;
+    justify-content: center;
+}
+
+.name-column {
+    text-align: left;
+    font-weight: bold;
+}
+
+.url-column {
+    text-align: left;
+}
+
+.status-column {
+    text-align: center;
+    color: white;
+}
+
+.laststatus-column {
+    text-align: center;
+}
+
+.totaldowntime-column {
+    text-align: center;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s ease;
+}
