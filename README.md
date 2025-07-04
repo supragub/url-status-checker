@@ -10,7 +10,6 @@ Designed to check the status of URLs and API endpoints. This is not production r
 [![Flask][Flask]][Flask-url]
 [![JavaScript][JavaScript]][JavaScript-url]
 [![HTML5][HTML5]][HTML5-url]
-
 [![CSS3][CSS3]][CSS3-url]
 
 ## Project Structure
@@ -34,7 +33,7 @@ url-status-checker/
 │   └── requirements.log
 ├── requirements.txt      # Python dependencies
 ├── run.py                # Entry point to run the Flask app
-├── start-local.ps1       # Script to start the app locally (Windows)
+├── start.ps1       # Script to start the app locally (Windows)
 ├── .env.example          # Example environment variables
 ├── LICENSE
 ├── README.md
@@ -67,14 +66,13 @@ Windows:
 ```
 powershell.exe -File start.ps1
 ```
-### 3. Shutdown app
+
+### 3. Shutdown app in local
 
 Windows:
-
 ```
-
+To stop the app, open Windows Task Manager and end the process named "Python".
 ```
-
 
 [Python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [Python-url]: https://www.python.org/
