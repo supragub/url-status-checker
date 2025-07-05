@@ -4,6 +4,11 @@
 
 Designed to check the status of URLs and API endpoints. This is not production ready, it is a proof of concept for a website status checker. Do not use it in production, it is not secure and does not handle errors properly. You can use it locally.
 
+
+<p align="center">
+	<img src="app/static/images/app.png" alt="App Screenshot" style="max-width: 700px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); margin: 24px 0;" />
+</p>
+
 ## Built with
 
 [![Python][Python]][Python-url]
