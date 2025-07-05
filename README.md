@@ -1,8 +1,9 @@
-# URL status checker
+# URL Status Checker
 
 ## About the project
 
-Designed to check the status of URLs and API endpoints. This is not production ready, it is a proof of concept for a website status checker. Do not use it in production, it is not secure and does not handle errors properly. You can use it locally.
+A web application for checking the status of URLs and API endpoints, displayed in a CRUD table.  
+This is is a proof of concept. Do not use it in production, it is not secure and does not handle errors properly.
 
 
 <p align="center">
