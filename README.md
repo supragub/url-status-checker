@@ -3,7 +3,7 @@
 ## About the project
 
 A web application for checking the status of URLs and API endpoints, displayed in a CRUD table.  
-This is is a proof of concept. Do not use it in production, it is not secure and does not handle errors properly.
+This is a proof of concept. Do not use it in production, it is not secure and does not handle errors properly.
 
 
 <p align="center">
@@ -85,11 +85,11 @@ To stop the app, open Windows Task Manager and end the process named "Python".
 
 [Python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [Python-url]: https://www.python.org/
-[Flask]: https://img.shields.io/badge/flask-000000?style=for-the-badge&logo=flask&logoColor=white
+[Flask]: https://img.shields.io/badge/flask-43B02A?style=for-the-badge&logo=flask&logoColor=white
 [Flask-url]: https://flask.palletsprojects.com/
-[JavaScript]: https://img.shields.io/badge/javascript-000000?style=for-the-badge&logo=javascript&logoColor=white
+[JavaScript]: https://img.shields.io/badge/javascript-802045?style=for-the-badge&logo=javascript&logoColor=white
 [JavaScript-url]: https://www.javascript.com/
-[HTML5]: https://img.shields.io/badge/html5-000000?style=for-the-badge&logo=html5&logoColor=white
+[HTML5]: https://img.shields.io/badge/html5-ff5000?style=for-the-badge&logo=html5&logoColor=white
 [HTML5-url]: https://html.spec.whatwg.org/
-[CSS3]: https://img.shields.io/badge/css3-000000?style=for-the-badge&logo=css3&logoColor=white
+[CSS3]: https://img.shields.io/badge/css3-2496ED?style=for-the-badge&logo=css3&logoColor=white
 [CSS3-url]: https://www.w3.org/Style/CSS/Overview.en.html
