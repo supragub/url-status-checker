@@ -62,7 +62,7 @@ https://www.python.org/downloads/
 
 ## Getting Started
 
-### 1. Clone Bitbucket repository
+### 1. Clone GitHub repository
 
 ```
 git clone https://github.com/supragub/url-status-checker.git
